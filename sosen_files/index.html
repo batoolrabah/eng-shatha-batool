@@ -1,0 +1,586 @@
+
+<!-- saved from url=(0132)blob:https://0xpa0jp2hoc9vfr90pfansgol009p825m26v93nu9qkngofisv-h761100114.scf.usercontent.goog/5fd97c74-3a25-4c67-82c4-7064c215bb4e -->
+<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>(function(firebaseConfig, initialAuthToken, appId) {
+        window.__firebase_config = firebaseConfig;
+        window.__initial_auth_token = initialAuthToken;
+        window.__app_id = appId;
+            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6ImY2ZTAxMDEwMWQ1NmE1NmIyZDY4Y2U3NDZkNmI5YzJlMmFlYzU5ZGQiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6XC9cL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbVwvZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIxNjk5NDk2ODk2MDY3NzcxNjQ3MyIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJleHAiOjE3NDgzMjg2MjksImlhdCI6MTc0ODMyNTAyOSwiYWxnIjoiUlMyNTYifQ.GsdwHGSVdtElvf0Q5OqQHBAtt6o9whwO6hzZF7H0xsWSPDfbAU5RgIGMqJCNjqC-psbJFt_6loHA2lyQ2ZWGKEh5rgmE0tSZtC6x-SFjFtHL0nbYBg4qQyPPbGfVGCCB47dzGF0oqEZZg-_c0rBJ6Y_RXGI_Bm4O5nA17qEeOKd9HgSHt9HwlwIx3NHBM5bhA-GhCzXDGzqPwKFZXdHdYz4bvmTrl5mXlM_PIs1J_hQ2h8G44J2aw5zCjGrxj-Nx3KSoIJMBFbreiwMAmzW_7t0UHiuWyfdrHX7PxTmMZTtomYyFMNsJ0MFP6eMfqewIwleOIxx0fOiItp857B9VRA","c_8eac8501a6af8948_plant-parts-quiz-149")</script><script>(function() {
+  // Ensure this script is executed only once
+  if (window.firebaseAuthBridgeScriptLoaded) {
+    return;
+  }
+  window.firebaseAuthBridgeScriptLoaded = true;
+
+  let nextTokenPromiseId = 0;
+
+  // Stores { resolve, reject } for ongoing token requests
+  const pendingTokenPromises = {};
+
+  // Listen for messages from the Host Application
+  window.addEventListener('message', function(event) {
+
+    const messageData = event.data;
+
+  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
+      const { success, token, error, promiseId } = messageData ?? {};
+      if (pendingTokenPromises[promiseId]) {
+        if (success) {
+          pendingTokenPromises[promiseId].resolve(token);
+        } else {
+          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
+        }
+        delete pendingTokenPromises[promiseId];
+      }
+    }
+  });
+
+  // Expose a function for the Generated App to request a new Firebase token
+  window.requestNewFirebaseToken = function() {
+    const currentPromiseId = nextTokenPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingTokenPromises[currentPromiseId] = { resolve, reject };
+    });
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'REQUEST_NEW_FIREBASE_TOKEN',
+        promiseId: currentPromiseId
+      }, '*');
+    } else {
+      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
+      delete pendingTokenPromises[currentPromiseId];
+    }
+    return promise;
+  };
+})();</script><script>let realOriginalGetUserMedia = null;
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+}
+
+(function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
+    try {
+      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
+        get: function() {
+          return undefined; // Or throw an error
+        },
+        configurable: false
+      });
+    } catch (error) {
+      console.error("Error defining prototype getter:", error);
+    }
+  }
+})();
+
+(function() {
+  let originalGetUserMedia = realOriginalGetUserMedia;
+
+  const pendingMediaResolvers = {};
+  let nextMediaPromiseId = 0;
+
+  function interceptGetUserMedia() {
+    if (navigator.mediaDevices) {
+      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        value: function(constraints) {
+          const mediaPromiseId = nextMediaPromiseId++;
+          const promise = new Promise((resolve, reject) => {
+            pendingMediaResolvers[mediaPromiseId] = (granted) => {
+              delete pendingMediaResolvers[mediaPromiseId];
+              if (granted) {
+                if (originalGetUserMedia) {
+                  originalGetUserMedia(constraints).then(resolve).catch(reject);
+                } else {
+                  reject(new Error("Original getUserMedia not available."));
+                }
+              } else {
+              reject(new DOMException('Permission denied', 'NotAllowedError'));
+            }
+          };
+        });
+
+        window.parent.postMessage({
+          type: 'requestMediaPermission',
+          constraints: constraints,
+          promiseId: mediaPromiseId,
+        }, '*');
+
+        return promise;
+      },
+      writable: false,
+      configurable: false
+    });
+    }
+  }
+
+  interceptGetUserMedia();
+
+  const observer = new MutationObserver(function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'childList' && mutation.addedNodes) {
+        mutation.addedNodes.forEach(node => {
+          if (node === navigator.mediaDevices) {
+            interceptGetUserMedia();
+          }
+        });
+      }
+    }
+  });
+
+  window.addEventListener('message', function(event) {
+    if (event.data) {
+      if (event.data.type === 'resolveMediaPermission') {
+        const { promiseId, granted } = event.data;
+        if (pendingMediaResolvers[promiseId]) {
+          pendingMediaResolvers[promiseId](granted);
+        }
+      }
+    }
+  });
+
+})();</script><script>(function() {
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+
+    /**
+   * Normalizes an error event or a promise rejection reason into a structured error object.
+   * @param {*} errorEventOrReason The error object or reason.
+   * @return {object} Structured error data { message, name, stack }.
+   */
+  function getErrorObject(errorEventOrReason) {
+    if (errorEventOrReason instanceof Error) {
+      return {
+        message: errorEventOrReason.message,
+        name: errorEventOrReason.name,
+        stack: errorEventOrReason.stack,
+      };
+    }
+    // Fallback for non-Error objects.
+    try {
+      return {
+        message: JSON.stringify(errorEventOrReason),
+        name: 'UnknownErrorType',
+        stack: null,
+      };
+    } catch (e) {
+      return {
+        message: String(errorEventOrReason),
+        name: 'UnknownErrorTypeNonStringifiable',
+        stack: null,
+      };
+    }
+  }
+
+  /**
+   * Converts an array of arguments (from log/error) into a single string.
+   * Handles Error objects specially to include their message and stack.
+   * @param {Array<*>} args - Arguments passed to console methods.
+   * @return {string} A string representation of the arguments.
+   */
+  function stringifyArgs(args) {
+    return args
+      .map((arg) => {
+        if (arg instanceof Error) {
+          const {message, stack} = arg;
+          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
+        }
+        if (typeof arg === 'object' && arg !== null) {
+          try {
+            return JSON.stringify(arg);
+          } catch (error) {
+            return '[Circular Object]';
+          }
+        } else {
+          return String(arg);
+        }
+      })
+      .join(' ');
+  }
+
+  console.log = function(...args) {
+    const logString = stringifyArgs(args);
+    window.parent.postMessage({ type: 'log', message: logString }, '*');
+    originalConsoleLog.apply(console, args);
+  };
+
+  console.error = function(...args) {
+    let errorData;
+    if (args.length > 0 && args[0] instanceof Error) {
+      const err = args[0];
+      // If the first arg is an Error, capture its details.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        ...getErrorObject(err),
+        rawArgsString: stringifyArgs(args.slice(1)),
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // If not an Error object, treat all args as a general error message.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        message: stringifyArgs(args),
+        name: 'ConsoleLoggedError',
+        stack: null,
+        timestamp: new Date().toISOString(),
+      };
+    }
+    window.parent.postMessage(errorData, '*');
+    originalConsoleError.apply(console, args);
+  };
+
+  // Listen for global unhandled synchronous errors.
+  window.addEventListener('error', function(event) {
+    const errorDetails = event.error ? getErrorObject(event.error) : {
+      message: event.message,
+      name: 'GlobalError',
+      stack: null,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    };
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'global',
+      ...errorDetails,
+      message: errorDetails.message || event.message,
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+  // Listen for unhandled promise rejections (asynchronous errors).
+  window.addEventListener('unhandledrejection', function(event) {
+    const errorDetails = getErrorObject(event.reason);
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'unhandledrejection',
+      ...errorDetails,
+      message: errorDetails.message || 'Unhandled Promise Rejection',
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+})();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار أجزاء النبات</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <style>
+        /* Custom font for a friendly look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4; /* Light green background */
+        }
+        .container {
+            max-width: 800px;
+        }
+        .question-card {
+            background-color: #ffffff;
+            border: 2px solid #a7f3d0; /* Green border */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .correct-answer {
+            background-color: #d1fae5; /* Lighter green for correct */
+            border-color: #34d399; /* Darker green border */
+        }
+        .incorrect-answer {
+            background-color: #fee2e2; /* Light red for incorrect */
+            border-color: #ef4444; /* Darker red border */
+        }
+        .feedback {
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        .correct-text {
+            color: #10b981; /* Green text */
+        }
+        .incorrect-text {
+            color: #ef4444; /* Red text */
+        }
+        /* Style for radio buttons */
+        input[type="radio"] {
+            accent-color: #10b981; /* Green accent color */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.mx-auto{margin-left:auto;margin-right:auto}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-2{margin-left:0.5rem}.mt-8{margin-top:2rem}.block{display:block}.flex{display:flex}.min-h-screen{min-height:100vh}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.items-center{align-items:center}.justify-center{justify-content:center}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.p-2{padding:0.5rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-4{padding-top:1rem;padding-bottom:1rem}.text-center{text-align:center}.text-right{text-align:right}.text-2xl{font-size:1.5rem;line-height:2rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87 / var(--tw-bg-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-4:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-emerald-300:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(110 231 183 / var(--tw-ring-opacity, 1))}</style></head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="container mx-auto p-6 bg-white rounded-xl shadow-lg text-center">
+        <h1 class="text-4xl font-extrabold text-emerald-700 mb-4 rounded-lg p-2 bg-emerald-100">
+            أجزاء النبات الجميلة
+        </h1>
+        <p class="text-lg text-gray-700 mb-6">
+            مرحباً بكم يا أبطال الصف الأول الابتدائي!
+            <br>
+            <span class="font-semibold text-emerald-600">مع المعلمة: سوسن الشمج</span>
+        </p>
+        <p class="text-md text-gray-600 mb-8">
+            هيا بنا نستكشف عالم النباتات الرائع ونتعلم عن أجزائها المختلفة! اقرأ السؤال جيداً ثم اختر الإجابة الصحيحة.
+        </p>
+
+        <form id="quizForm" class="space-y-6">
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">1. ما الجزء الذي ينمو تحت الأرض ويثبت النبتة؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q1" value="a" class="ml-2"> الورقة
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q1" value="b" class="ml-2"> الساق
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q1" value="c" class="ml-2"> الجذر
+                    </label>
+                </div>
+                <div id="feedback1" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">2. أي جزء يحمل الأوراق والأزهار والثمار؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q2" value="a" class="ml-2"> الزهرة
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q2" value="b" class="ml-2"> الساق
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q2" value="c" class="ml-2"> الجذر
+                    </label>
+                </div>
+                <div id="feedback2" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">3. ما الجزء الذي يصنع الغذاء للنبات بمساعدة الشمس؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q3" value="a" class="ml-2"> الورقة
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q3" value="b" class="ml-2"> الزهرة
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q3" value="c" class="ml-2"> الثمرة
+                    </label>
+                </div>
+                <div id="feedback3" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">4. ما الجزء الذي يتحول إلى ثمرة لذيذة؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q4" value="a" class="ml-2"> الساق
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q4" value="b" class="ml-2"> الزهرة
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q4" value="c" class="ml-2"> الورقة
+                    </label>
+                </div>
+                <div id="feedback4" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">5. ما الجزء الذي نحصل منه على البذور لنزرع نباتات جديدة؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q5" value="a" class="ml-2"> الورقة
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q5" value="b" class="ml-2"> الساق
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q5" value="c" class="ml-2"> الثمرة
+                    </label>
+                </div>
+                <div id="feedback5" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">6. ماذا تحتاج النبتة لتنمو بشكل جيد؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q6" value="a" class="ml-2"> الحلوى واللعب
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q6" value="b" class="ml-2"> الماء والشمس والهواء
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q6" value="c" class="ml-2"> الألعاب والهدايا
+                    </label>
+                </div>
+                <div id="feedback6" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">7. أي جزء من النبات يمتص الماء من التربة؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q7" value="a" class="ml-2"> الساق
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q7" value="b" class="ml-2"> الجذر
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q7" value="c" class="ml-2"> الورقة
+                    </label>
+                </div>
+                <div id="feedback7" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">8. ماذا نسمي الجزء الذي يحمل الأوراق الخضراء؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q8" value="a" class="ml-2"> الزهرة
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q8" value="b" class="ml-2"> الجذر
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q8" value="c" class="ml-2"> الساق
+                    </label>
+                </div>
+                <div id="feedback8" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">9. ماذا نصنع من بعض أجزاء النباتات؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q9" value="a" class="ml-2"> الملابس
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q9" value="b" class="ml-2"> الطعام اللذيذ
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q9" value="c" class="ml-2"> السيارات
+                    </label>
+                </div>
+                <div id="feedback9" class="feedback text-sm"></div>
+            </div>
+
+            <div class="question-card p-5 rounded-lg text-right">
+                <p class="text-xl font-semibold text-gray-800 mb-4">10. أين نجد معظم النباتات؟</p>
+                <div class="space-y-3">
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q10" value="a" class="ml-2"> في البحر
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q10" value="b" class="ml-2"> على اليابسة (الأرض)
+                    </label>
+                    <label class="block cursor-pointer text-gray-700 text-lg">
+                        <input type="radio" name="q10" value="c" class="ml-2"> في الفضاء
+                    </label>
+                </div>
+                <div id="feedback10" class="feedback text-sm"></div>
+            </div>
+
+            <button type="button" onclick="checkAnswers()" class="mt-8 px-8 py-4 bg-emerald-600 text-white font-bold text-xl rounded-full shadow-lg
+                       hover:bg-emerald-700 transition duration-300 transform hover:scale-105
+                       focus:outline-none focus:ring-4 focus:ring-emerald-300">
+                تحقق من الإجابات
+            </button>
+        </form>
+
+        <div id="scoreDisplay" class="mt-8 text-2xl font-bold text-emerald-800"></div>
+    </div>
+
+    <script>
+        // Define the correct answers for each question
+        const correctAnswers = {
+            q1: 'c', // الجذر (Root)
+            q2: 'b', // الساق (Stem)
+            q3: 'a', // الورقة (Leaf)
+            q4: 'b', // الزهرة (Flower)
+            q5: 'c', // الثمرة (Fruit)
+            q6: 'b', // الماء والشمس والهواء (Water, sun, and air)
+            q7: 'b', // الجذر (Root)
+            q8: 'c', // الساق (Stem)
+            q9: 'b', // الطعام اللذيذ (Delicious food)
+            q10: 'b' // على اليابسة (الأرض) (On land)
+        };
+
+        /**
+         * Checks the user's answers, provides feedback, and displays the final score.
+         */
+        function checkAnswers() {
+            let score = 0; // Initialize score
+            const form = document.getElementById('quizForm');
+            const totalQuestions = Object.keys(correctAnswers).length; // Total number of questions
+
+            // Loop through each question to check answers
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const selectedAnswer = form.elements[questionName].value; // Get the value of the selected radio button for the current question
+                const feedbackElement = document.getElementById(`feedback${i}`); // Get the feedback div for the current question
+                const questionCard = feedbackElement.closest('.question-card'); // Get the parent question card div
+
+                // Reset previous feedback styles and text
+                questionCard.classList.remove('correct-answer', 'incorrect-answer');
+                feedbackElement.textContent = '';
+                feedbackElement.classList.remove('correct-text', 'incorrect-text');
+
+                // Check if an answer was selected for the current question
+                if (selectedAnswer) {
+                    // Compare the selected answer with the correct answer
+                    if (selectedAnswer === correctAnswers[questionName]) {
+                        // If correct, increment score and apply correct styles
+                        score++;
+                        feedbackElement.textContent = 'إجابة صحيحة! 🎉';
+                        feedbackElement.classList.add('correct-text');
+                        questionCard.classList.add('correct-answer');
+                    } else {
+                        // If incorrect, display correct answer and apply incorrect styles
+                        feedbackElement.textContent = `إجابة خاطئة. الإجابة الصحيحة هي: ${getCorrectAnswerText(questionName, correctAnswers[questionName])} ❌`;
+                        feedbackElement.classList.add('incorrect-text');
+                        questionCard.classList.add('incorrect-answer');
+                    }
+                } else {
+                    // If no answer was selected, inform the user and mark as incorrect
+                    feedbackElement.textContent = 'لم تختر إجابة لهذا السؤال.';
+                    feedbackElement.classList.add('incorrect-text'); // Mark as incorrect if not answered
+                    questionCard.classList.add('incorrect-answer');
+                }
+            }
+
+            // Display the final score to the user
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `لقد حصلت على ${score} من ${totalQuestions} إجابات صحيحة!`;
+
+            // Scroll to the top of the page to make the score visible
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * Helper function to retrieve the display text of the correct answer option.
+         * @param {string} questionName - The name attribute of the radio button group (e.g., 'q1').
+         * @param {string} correctAnswerKey - The value of the correct answer (e.g., 'c').
+         * @returns {string} The text content of the correct answer option.
+         */
+        function getCorrectAnswerText(questionName, correctAnswerKey) {
+            const form = document.getElementById('quizForm');
+            const radios = form.elements[questionName]; // Get all radio buttons for the question
+            for (const radio of radios) {
+                if (radio.value === correctAnswerKey) {
+                    // Return the text content of the label associated with the correct radio button
+                    // We trim and replace to remove the radio button itself and any leading/trailing whitespace
+                    return radio.parentNode.textContent.trim().replace(radio.labels[0].textContent, '').trim();
+                }
+            }
+            return ''; // Should ideally not be reached if correctAnswers are defined properly
+        }
+    </script>
+
+
+</body></html>
