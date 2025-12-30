@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عيادة د. فؤاد البكري لطب الأسنان</title>
+    <meta
+      name="description"
+      content="عيادة د. فؤاد البكري لطب الأسنان - ابتسامتك مسؤوليتنا. حجز مواعيد، تجميل الأسنان، زراعة وتقويم الأسنان في أجواء مريحة واحترافية."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header class="header" id="top">
+      <div class="container header-inner">
+        <div class="logo">
+          <div class="logo-icon">FB</div>
+          <div class="logo-text">
+            <span class="logo-title">عيادة د. فؤاد البكري</span>
+            <span class="logo-subtitle">لـ طب وتجميل الأسنان</span>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="#about">عن العيادة</a>
+          <a href="#services">الخدمات</a>
+          <a href="#gallery">قبل وبعد</a>
+          <a href="#testimonials">آراء المرضى</a>
+          <a href="#blog">نصائح</a>
+          <a href="#contact">التواصل</a>
+        </nav>
+        <div class="header-actions">
+          <a href="#booking" class="btn btn-outline">حجز موعد</a>
+          <button class="menu-toggle" aria-label="القائمة">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <div class="mobile-nav">
+        <a href="#about">عن العيادة</a>
+        <a href="#services">الخدمات</a>
+        <a href="#gallery">قبل وبعد</a>
+        <a href="#testimonials">آراء المرضى</a>
+        <a href="#blog">نصائح</a>
+        <a href="#contact">التواصل</a>
+        <a href="#booking" class="btn btn-outline">حجز موعد</a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="badge">ابتسامتك مسؤوليتنا</span>
+          <h1>ابتسامة واثقة تبدأ من عيادة<br />د. فـؤاد البكري لطب الأسنان</h1>
+          <p>
+            عيادة متخصصة في تجميل، زراعة، وتقويم الأسنان، بأحدث التقنيات العالمية
+            وأعلى معايير الأمان والتعقيم، لتعيش أفضل نسخة من ابتسامتك.
+          </p>
+          <div class="hero-actions">
+            <a href="#booking" class="btn btn-primary">احجز موعدك الآن</a>
+            <a href="#services" class="btn btn-ghost">استعراض الخدمات</a>
+          </div>
+          <div class="hero-meta">
+            <div>
+              <span class="meta-number">15+</span>
+              <span class="meta-label">سنة خبرة</span>
+            </div>
+            <div>
+              <span class="meta-number">5,000+</span>
+              <span class="meta-label">ابتسامة سعيدة</span>
+            </div>
+            <div>
+              <span class="meta-number">4.9</span>
+              <span class="meta-label">تقييم المرضى</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <h2>موعدك القادم أقرب مما تتخيل</h2>
+            <p>اختر موعدك، وسنتواصل معك لتأكيد الحجز خلال أقل من ساعة عمل.</p>
+            <form id="quick-booking-form" class="hero-form">
+              <div class="form-group">
+                <label for="quick-name">الاسم الكامل</label>
+                <input id="quick-name" type="text" required />
+              </div>
+              <div class="form-group">
+                <label for="quick-phone">رقم الجوال</label>
+                <input
+                  id="quick-phone"
+                  type="tel"
+                  placeholder="05xxxxxxxx"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="quick-service">الخدمة المطلوبة</label>
+                <select id="quick-service">
+                  <option value="فحص عام">فحص عام وتنظيف</option>
+                  <option value="تبييض الأسنان">تبييض الأسنان</option>
+                  <option value="تقويم الأسنان">تقويم الأسنان</option>
+                  <option value="زراعة الأسنان">زراعة الأسنان</option>
+                  <option value="ألم طارئ">ألم طارئ</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full">
+                طلب حجز سريع
+              </button>
+              <p class="hero-note">
+                لن يتم تأكيد الموعد إلا بعد التواصل معك هاتفيًا أو عبر واتساب.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container two-col">
+        <div class="section-content">
+          <h2>عن عيادة د. فؤاد البكري</h2>
+          <p>
+            تأسَّست عيادة د. فؤاد البكري لطب وتجميل الأسنان بروح تجمع بين الطب
+            الحديث واللمسة الإنسانية، لنمنحك تجربة علاجية مختلفة تشعر فيها
+            بالراحة والطمأنينة من لحظة دخولك وحتى ابتسامتك الأخيرة في المرآة.
+          </p>
+          <p>
+            نستخدم أحدث تقنيات التصوير الرقمي، التصميم الرقمي للابتسامة
+            (Digital Smile Design)، وتقنيات الزراعة والتقويم الحديثة، مع التزام
+            صارم بمعايير التعقيم العالمية.
+          </p>
+          <div class="about-grid">
+            <div class="about-card">
+              <h3>رؤية العيادة</h3>
+              <p>
+                أن تكون عيادة د. فؤاد البكري الوجهة الأولى لمن يبحث عن ابتسامة
+                طبيعية، صحية، وراقية.
+              </p>
+            </div>
+            <div class="about-card">
+              <h3>رسالتنا</h3>
+              <p>
+                تقديم رعاية فموية شاملة تراعي احتياجك الصحي والنفسي والجمالي، مع
+                شرح واضح لكل خطوة.
+              </p>
+            </div>
+            <div class="about-card">
+              <h3>قيمنا</h3>
+              <p>الأمان، الشفافية، التخصص، واحترام وقت وراحة المريض.</p>
+            </div>
+          </div>
+        </div>
+        <div class="section-side">
+          <div class="stats-card">
+            <h3>أرقام تتحدث عنّا</h3>
+            <ul>
+              <li><span>+15</span> سنة ممارسة في طب وتجميل الأسنان</li>
+              <li><span>+5000</span> مريض خدمناهم بكل فخر</li>
+              <li><span>+1200</span> حالة تجميل ابتسامة شاملة</li>
+              <li><span>+800</span> زراعة سنية ناجحة</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2>خدماتنا</h2>
+          <p>
+            مجموعة متكاملة من خدمات طب وتجميل الأسنان، مصمّمة لتناسب احتياجاتك
+            من الفحص البسيط حتى الابتسامة الهوليوودية.
+          </p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon">🦷</div>
+            <h3>الفحص والتنظيف الدوري</h3>
+            <p>
+              تنظيف احترافي، إزالة الجير، وتلميع الأسنان للحفاظ على صحة اللثة
+              ومنع التسوّس مبكرًا.
+            </p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">✨</div>
+            <h3>تبييض الأسنان الاحترافي</h3>
+            <p>
+              تبييض آمن وسريع باستخدام مواد مُعتمدة طبيًا، مع خيارات تبييض في
+              العيادة أو في المنزل تحت إشراف الطبيب.
+            </p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">😁</div>
+            <h3>عدسات وتجميل الابتسامة</h3>
+            <p>
+              عدسات خزفية (فينير) أو زركون لتصحيح اللون، الشكل، والمسافات بين
+              الأسنان، مع تصميم رقمي مسبق لابتسامتك.
+            </p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">🪥</div>
+            <h3>علاج اللثة والحساسية</h3>
+            <p>
+              علاج التهابات اللثة، نزيف اللثة، وحساسية الأسنان بطرق حديثة تحافظ
+              على صحة أنسجة الفم.
+            </p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">🪛</div>
+            <h3>زراعة الأسنان</h3>
+            <p>
+              استبدال الأسنان المفقودة بغرسات ثابتة تحاكي السن الطبيعي في الشكل
+              والوظيفة وطول العمر.
+            </p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">🎯</div>
+            <h3>تقويم الأسنان للكبار والأطفال</h3>
+            <p>
+              تقويم معدني، خزفي، وشفاف (Aligners) لتصحيح تزاحم الأسنان وبروزها
+              مع خطط مريحة للأقساط.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before/After Gallery -->
+    <section id="gallery" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>النتائج قبل وبعد</h2>
+          <p>
+            نماذج لابتسامات حقيقية تم تصميمها وعلاجها بعناية. (يمكن لاحقًا
+            استبدال الصور بحالات حقيقية من العيادة).
+          </p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <div class="gallery-label">قبل</div>
+            <div class="gallery-placeholder">صورة قبل</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-label">بعد</div>
+            <div class="gallery-placeholder gallery-after">
+              صورة بعد
+            </div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-label">قبل</div>
+            <div class="gallery-placeholder">صورة قبل</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-label">بعد</div>
+            <div class="gallery-placeholder gallery-after">
+              صورة بعد
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2>ماذا يقول مرضانا؟</h2>
+          <p>تجارب حقيقية لمرضى وجدوا في عيادة د. فؤاد البكري ابتسامتهم الجديدة.</p>
+        </div>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              "أول مرة أزور عيادة أسنان وأطلع منها مبتسمة! دكتور فؤاد يشرح كل
+              خطوة ويهتم بأدق التفاصيل."
+            </p>
+            <div class="testimonial-meta">
+              <span class="name">أمل .س</span>
+              <span class="tag">عدسات تجميلية</span>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              "كنت خايفة من الزراعة لكن التجربة كانت أسهل مما أتوقع، والنتيجة
+              طبيعية جدًا."
+            </p>
+            <div class="testimonial-meta">
+              <span class="name">نورة .ع</span>
+              <span class="tag">زراعة أسنان</span>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              "ابني كان يرفض يروح لطبيب أسنان، لكن تعامل الدكتور مع الأطفال
+              رهيب، صار يسأل متى نرجع!"
+            </p>
+            <div class="testimonial-meta">
+              <span class="name">سلمان .م</span>
+              <span class="tag">تقويم أطفال</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smart Assistant (Questionnaire) -->
+    <section id="assistant" class="section">
+      <div class="container two-col">
+        <div class="section-content">
+          <h2>لا تعرف من أين تبدأ؟ دع المساعد الذكي يقترح لك الخدمة</h2>
+          <p>
+            أجب عن بعض الأسئلة البسيطة، وسنقترح لك الخدمة الأنسب لحالتك مع
+            إمكانية إرسال النتيجة مباشرة إلى نموذج الحجز.
+          </p>
+          <form id="assistant-form" class="assistant-form">
+            <div class="form-group">
+              <label>ما هو هدفك الأساسي حاليًا؟</label>
+              <div class="options">
+                <label>
+                  <input type="radio" name="goal" value="ألم" required />
+                  أعاني من ألم حاد أو مزعج
+                </label>
+                <label>
+                  <input type="radio" name="goal" value="تجميل" />
+                  أبحث عن ابتسامة أجمل/تبييض
+                </label>
+                <label>
+                  <input type="radio" name="goal" value="تقويم" />
+                  أريد تعديل ترتيب/تزاحم الأسنان
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>منذ متى بدأت المشكلة تقريبًا؟</label>
+              <select name="duration" required>
+                <option value="">اختر المدة</option>
+                <option value="أيام">منذ أيام</option>
+                <option value="أسابيع">منذ أسابيع</option>
+                <option value="أشهر+">منذ أشهر أو أكثر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>هل سبق وتم علاج أسنانك مؤخرًا؟</label>
+              <div class="options options-inline">
+                <label>
+                  <input type="radio" name="recent" value="نعم" required />
+                  نعم
+                </label>
+                <label>
+                  <input type="radio" name="recent" value="لا" />
+                  لا
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-outline">
+              اقترح خدمة مناسبة لي
+            </button>
+          </form>
+        </div>
+        <div class="section-side">
+          <div class="assistant-result" id="assistant-result">
+            <h3>الاقتراح المبدئي</h3>
+            <p>بعد تعبئة النموذج، سيظهر هنا اقتراح الخدمة المناسبة لك.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="section section-alt">
+      <div class="container two-col">
+        <div class="section-content">
+          <h2>احجز موعدك الآن</h2>
+          <p>
+            اختر اليوم المناسب لك، اترك بيانات التواصل، وسيتواصل معك فريق
+            العيادة لتأكيد الحجز وتحديد الوقت الأنسب.
+          </p>
+          <ul class="booking-highlights">
+            <li>موقع مركزي يسهل الوصول إليه</li>
+            <li>مواقف خاصة للمرضى</li>
+            <li>خيارات دفع وتقسيط ميسّرة</li>
+            <li>قسم خاص للأطفال</li>
+          </ul>
+        </div>
+        <div class="section-side">
+          <form id="booking-form" class="booking-form">
+            <div class="form-group">
+              <label for="name">الاسم الكامل</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">رقم الجوال</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="05xxxxxxxx"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="service">الخدمة المطلوبة</label>
+              <select id="service" name="service" required>
+                <option value="">اختر الخدمة</option>
+                <option value="فحص وتنظيف">فحص وتنظيف دوري</option>
+                <option value="تبييض الأسنان">تبييض الأسنان</option>
+                <option value="تجميل الابتسامة">تجميل الابتسامة (فينير)</option>
+                <option value="زراعة الأسنان">زراعة الأسنان</option>
+                <option value="تقويم الأسنان">تقويم الأسنان</option>
+                <option value="ألم طارئ">ألم طارئ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">اليوم المفضّل</label>
+              <input id="date" name="date" type="date" required />
+            </div>
+            <div class="form-group">
+              <label for="notes">ملاحظات إضافية (اختياري)</label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="3"
+                placeholder="مثال: أفضل الفترات المسائية، لدي حساسية من البنج..."
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              إرسال طلب الحجز
+            </button>
+            <p class="form-note">
+              سيصلك تأكيد الموعد عبر
+              <strong>واتساب أو اتصال هاتفي</strong>
+              من فريق العيادة.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog / Tips -->
+    <section id="blog" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>نصائح من د. فؤاد</h2>
+          <p>معلومات بسيطة تساعدك تحافظ على صحة فمك وأسنانك بين الزيارات.</p>
+        </div>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <span class="blog-tag">العناية اليومية</span>
+            <h3>٥ عادات صغيرة تصنع فرقًا كبيرًا في صحة أسنانك</h3>
+            <p>
+              تفريش مرتين يوميًا، استخدام الخيط، وتقليل السكر ليست مجرد نصائح
+              تقليدية، بل هي الخط الدفاعي الأول ضد التسوّس.
+            </p>
+          </article>
+          <article class="blog-card">
+            <span class="blog-tag">تبييض الأسنان</span>
+            <h3>تبييض آمن... كيف تتجنّب أضرار الخلطات العشوائية؟</h3>
+            <p>
+              بعض المنتجات المنزلية أو الخلطات قد تسبّب تآكل المينا وحساسية
+              شديدة، تعرّف على البدائل الآمنة بإشراف الطبيب.
+            </p>
+          </article>
+          <article class="blog-card">
+            <span class="blog-tag">الأطفال</span>
+            <h3>متى يجب أن تكون أول زيارة لطفلك لطبيب الأسنان؟</h3>
+            <p>
+              كثير من المشاكل يمكن تجنّبها لو كانت الزيارة الأولى مبكرة وبأسلوب
+              مريح يجعل الطفل يحب الكرسي بدل أن يخاف منه.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Map -->
+    <section id="contact" class="section section-alt">
+      <div class="container two-col">
+        <div class="section-content">
+          <h2>موقع العيادة وطرق التواصل</h2>
+          <p>
+            نسعد بزيارتك في عيادة د. فؤاد البكري. يمكنك التواصل معنا عبر الواتساب
+            أو الهاتف أو البريد الإلكتروني، أو تعبئة نموذج الحجز في الأعلى.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">الهاتف:</span>
+              <a href="tel:+966500000000">+966 50 000 0000</a>
+            </li>
+            <li>
+              <span class="contact-label">واتساب:</span>
+              <a
+                href="#"
+                id="whatsapp-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                فتح واتساب مع العيادة
+              </a>
+            </li>
+            <li>
+              <span class="contact-label">البريد الإلكتروني:</span>
+              <a href="mailto:info@dr-fouadclinic.com">info@dr-fouadclinic.com</a>
+            </li>
+            <li>
+              <span class="contact-label">العنوان:</span>
+              <span>يتم تحديد العنوان الدقيق هنا لاحقًا (مدينة - حي - شارع).</span>
+            </li>
+          </ul>
+          <div class="socials">
+            <span>تابع د. فؤاد على:</span>
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="Snapchat">Snapchat</a>
+            <a href="#" aria-label="TikTok">TikTok</a>
+          </div>
+        </div>
+        <div class="section-side">
+          <div class="map-placeholder">
+            <p>خريطة جوجل</p>
+            <span>يمكن لاحقًا تضمين خريطة جوجل لموقع العيادة هنا.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <div class="logo-icon">FB</div>
+          <div class="logo-text">
+            <span class="logo-title">عيادة د. فؤاد البكري</span>
+            <span class="logo-subtitle">لـ طب وتجميل الأسنان</span>
+          </div>
+        </div>
+        <p class="footer-copy">
+          جميع الحقوق محفوظة &copy;
+          <span id="year"></span>
+          عيادة د. فؤاد البكري لطب وتجميل الأسنان.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Chatbot Floating Button -->
+    <button class="chatbot-toggle" id="chatbot-toggle" aria-label="مساعد العيادة">
+      💬
+    </button>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot" id="chatbot">
+      <div class="chatbot-header">
+        <div>
+          <h3>مساعد عيادة د. فؤاد</h3>
+          <span>روبوت محادثة للإجابة على أسئلتك السريعة</span>
+        </div>
+        <button id="chatbot-close" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="message bot">
+          <p>
+            أهلًا وسهلًا 👋 أنا المساعد الافتراضي لعيادة د. فؤاد.  
+            أستطيع مساعدتك في:
+          </p>
+          <ul>
+            <li>معرفة مواعيد العمل</li>
+            <li>موقع العيادة</li>
+            <li>الخدمات والأسعار التقريبية</li>
+            <li>طلب حجز موعد سريع</li>
+          </ul>
+        </div>
+      </div>
+      <div class="chatbot-quick">
+        <button data-question="ما هي مواعيد عمل العيادة؟">مواعيد العمل</button>
+        <button data-question="أين تقع العيادة؟">موقع العيادة</button>
+        <button data-question="أريد معرفة الأسعار التقريبية">الأسعار</button>
+        <button data-question="أرغب بحجز موعد">حجز موعد</button>
+      </div>
+      <form class="chatbot-input" id="chatbot-form">
+        <input
+          id="chatbot-text"
+          type="text"
+          placeholder="اكتب سؤالك هنا..."
+          autocomplete="off"
+        />
+        <button type="submit">إرسال</button>
+      </form>
+      <p class="chatbot-disclaimer">
+        المساعد يعطي معلومات توعوية عامة ولا يغني عن استشارة الطبيب وفحصك في
+        العيادة.
+      </p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
+
